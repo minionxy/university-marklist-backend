@@ -9,7 +9,6 @@ app.use(express.urlencoded({ extended: true }))
 app.post("/submit", (req, res) => {
     const { name, uregno, admnno, clgname, email, subjects } = req.body
 
-    // Parse numerical values
     const parsedUregno = parseInt(uregno)
     const parsedAdmnno = parseInt(admnno)
 
@@ -18,13 +17,10 @@ app.post("/submit", (req, res) => {
         mark: parseInt(sub.mark)
     }))
 
-    // Calculate total
     const total = parsedSubjects.reduce((acc, sub) => acc + sub.mark, 0)
 
-    // Calculate CGPA (assuming total per subject = 100)
     const cgpa = (total / (parsedSubjects.length * 10)).toFixed(2)
 
-    // Prepare response
     const resultData = {
         name,
         uregno: parsedUregno,
@@ -40,5 +36,5 @@ app.post("/submit", (req, res) => {
 })
 
 app.listen(4000, () => {
-    console.log("✅ Server is running")
+    console.log(" Server is running")
 })
